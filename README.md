@@ -13,3 +13,5 @@ source .venv/bin/activate
 python install -r requirements.txt
 fastapi dev main.py
 ```
+
+Maybe VS Code enters the virtual environment automatically. So you only have to start the pigpio Daemon and fastapi.
