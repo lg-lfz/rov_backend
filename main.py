@@ -19,6 +19,14 @@ def start():
     motor_GPIO.setSpeed(4)
     return "success"
 
+@app.get("/set_speed")
+def set_speed(speed: int):
+    motor_GPIO.setSpeed(speed)
+    return {
+        "state": "success",
+        "speed": str(speed)
+    }
+
 @app.get("/stop")
 def stop():
     motor_GPIO.setSpeed(0)
