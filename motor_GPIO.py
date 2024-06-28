@@ -1,6 +1,7 @@
 from time import sleep
 import pigpio
 import RPi.GPIO as GPIO
+import atexit
 
 # Set up BCM GPIO numbering
 GPIO.setmode(GPIO.BCM)
@@ -33,3 +34,6 @@ def convert_speed(input_value: float, limitation: float = 1.0) -> int:
 def close_connections():
     pi.set_servo_pulsewidth(ESC_GPIO, 0) # Stop servo pulses.
     pi.stop() # Disconnect pigpio.
+    print("Closed gpio connections")
+
+atexit.register(close_connections)
