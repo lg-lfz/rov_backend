@@ -3,6 +3,8 @@ from fastapi.responses import StreamingResponse
 import os
 import motor_GPIO
 
+motor = motor_GPIO.motor_GPIO()
+
 app = FastAPI()
 
 VIDEO_FILE_PATH = "./assets/file_example_MP4_1920_18MG.mp4"
@@ -16,13 +18,13 @@ def read_root():
 
 @app.get("/start")
 def start():
-    motor_GPIO.setSpeed(4)
+    motor.setSpeed(4)
     return "success"
 
 @app.get("/set_speed")
 def set_speed(speed: int):
     try:
-        motor_GPIO.setSpeed(speed)
+        motor.setSpeed(speed)
     except ValueError as e:
         print(e)
         return {
@@ -37,7 +39,7 @@ def set_speed(speed: int):
 
 @app.get("/stop")
 def stop():
-    motor_GPIO.setSpeed(0)
+    motor.setSpeed(0)
     return "success"
 
 @app.get("/video")
