@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 import os
+import motor_GPIO
 
 app = FastAPI()
 
@@ -12,6 +13,16 @@ def read_root():
         "Hello": "World",
         "How Cool": "Is This?! :-D"
     }
+
+@app.get("/start")
+def start():
+    motor_GPIO.setSpeed(4)
+    return "success"
+
+@app.get("/stop")
+def stop():
+    motor_GPIO.setSpeed(0)
+    return "success"
 
 @app.get("/video")
 async def get_video():
